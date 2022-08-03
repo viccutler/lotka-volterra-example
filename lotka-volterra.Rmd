@@ -8,7 +8,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(deSolve)
-library(kableExtra)
+library(kableExtra) ##camelcase is when uppercase is in the middle
 ```
 
 **Credit:** This code is closely based on the article [Numerically solving differential equations with R](https://rstudio-pubs-static.s3.amazonaws.com/32888_197d1a1896534397b67fb04e0d4899ae.html)
@@ -41,14 +41,14 @@ Solving the Lotke-Volterra equation:
 
 ```{r}
 # Create a sequence of times (days): 
-time <- seq(0, 25, by = 0.05)
+time <- seq(0, 25, by = 0.05) ## this would be our approximations we would do by hand, which would be a ton!
 
 # Set some parameter values (these can change - keep it in mind):
 parameters <- c(alpha = .75, beta = 0.8, delta = 0.5, gamma = 1)
 
 # Set the initial condition (prey and predator populations at t = 0).
 # Recall: x = prey, y = predator
-init_cond <- c(x = 5, y = 2)
+init_cond <- c(x = 5, y = 10)
 
 # Prepare the series of differential equations as a function: 
 lk_equations <- function(time, init_cond, parameters) {
@@ -71,7 +71,7 @@ approx_lk_df <- data.frame(approx_lk) %>%
 
 # Plot it! 
 ggplot(data = approx_lk_df, aes(x = time, y = population)) +
-  geom_line(aes(color = species))
+  geom_line(aes(color = species)) ##Looks continuous because our approximations are so close together
 ```
 
 ## Updating parameter values
